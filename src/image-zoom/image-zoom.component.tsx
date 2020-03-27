@@ -33,7 +33,7 @@ export default class ImageViewer extends React.Component<Props, State> {
   private zoomCurrentDistance = 0;
 
   // 图片手势处理
-  private imagePanResponder: PanResponderInstance | null = {};
+  private imagePanResponder: PanResponderInstance | null = null;
 
   // 上次手按下去的时间
   private lastTouchStartTime: number = 0;
@@ -73,6 +73,11 @@ export default class ImageViewer extends React.Component<Props, State> {
 
   // 是否在左右滑
   private isHorizontalWrap = false;
+
+  public constructor(props: Props) {
+    super(props)
+    this.initPanResponder()
+  }
 
   public initPanResponder() {
     this.imagePanResponder = PanResponder.create({
@@ -560,7 +565,6 @@ export default class ImageViewer extends React.Component<Props, State> {
   };
 
   public componentDidMount() {
-    this.initPanResponder()
     if (this.props.centerOn) {
       this.centerOn(this.props.centerOn);
     }
