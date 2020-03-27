@@ -33,7 +33,7 @@ export default class ImageViewer extends React.Component<Props, State> {
   private zoomCurrentDistance = 0;
 
   // 图片手势处理
-  private imagePanResponder: PanResponderInstance | null = null;
+  private imagePanResponder: PanResponderInstance | null = {};
 
   // 上次手按下去的时间
   private lastTouchStartTime: number = 0;
@@ -655,7 +655,6 @@ export default class ImageViewer extends React.Component<Props, State> {
     };
 
     const parentStyles = StyleSheet.flatten(this.props.style);
-
     return (
       <View
         style={{
@@ -664,7 +663,7 @@ export default class ImageViewer extends React.Component<Props, State> {
           width: this.props.cropWidth,
           height: this.props.cropHeight
         }}
-        {...this.imagePanResponder!?.panHandlers}
+        {...this.imagePanResponder!.panHandlers}
       >
         <Animated.View style={animateConf} renderToHardwareTextureAndroid>
           <View
